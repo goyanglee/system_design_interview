@@ -43,11 +43,10 @@
 
 ## URL 리다이렉션
 
-![7-6.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d79b395d-d706-4566-83db-37bfa1bdff3f/7-6.png)
 
 - 단축 URL을 받은 서버는 그 URL을 원래 URL로 바꾸어서 301 응답의 Location 헤더에 넣어 반환한다.
 
-![7-7.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/16c3ef27-8c5e-4a51-aaa1-99c6ab0b4e0d/7-7.png)
+
 
 [301 응답과 302 응답의 차이]
 
@@ -103,7 +102,7 @@ URL 리디렉션을 구현하는 가장 직관적인 방법은 해시테이블�
 - 따라서 사용할 수 있는 문자의 개수는 10+26+26=62개
 - hashValue의 길이를 정하려면 62^n≥3650억인 n의 최소값을 찾아야 한다. (개략적으로 3650억 개의 URL 만들 수 있어야 함)
 
-![제곱.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eff3de0b-21cf-409c-9713-e77045a9cdc1/제곱.png)
+
 
 hashValue 길이 = 7!
 
@@ -115,7 +114,7 @@ CRC32, MD5, SHA-1처럼 잘 알려진 해시 함수를 이용할 수 있지만 �
 
 이 문제를 해결하기 위해 처음 7개 글자만 사용하면 충돌 발생 확률이 높아진다. 충돌이 실제로 발생했을 때는, 충돌이 해소될 때까지 사전에 정한 문자열을 해시 값에 덧붙인다. 
 
-![DB에있나.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/83e3fdbf-86a0-4046-8af2-ed9fa793fcf0/DB에있나.png)
+
 
 이 방법으로는 충돌을 해소할 수는 있지만 단축 URL을 생성할 때 한 번 이상 데이터베이스 질의를 해야해서 오버헤드가 크다. 
 
@@ -133,11 +132,10 @@ CRC32, MD5, SHA-1처럼 잘 알려진 해시 함수를 이용할 수 있지만 �
 
 ### 두 접근법 비교
 
-![차이.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab615533-803b-4bf9-a74b-d1ef4810be12/차이.png)
+
 
 ## URL 단축기 상세 설계
 
-![DBwjwkd.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/509c5a06-183e-462e-8f4e-3dbd0f024910/DBwjwkd.png)
 
 1. 입력으로 긴 URL을 받는다. 
     1. [https://en.wikipedia.org/wiki/Systems_design](https://en.wikipedia.org/wiki/Systems_design)
@@ -158,7 +156,6 @@ CRC32, MD5, SHA-1처럼 잘 알려진 해시 함수를 이용할 수 있지만 �
 
 쓰기보다 읽기를 더 자주하는 시스템이라 <단축URL, 원래URL>의 쌍을 캐시에 저장해서 성능을 높였다. 
 
-![캐시.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92daa2fa-f9ce-47ea-a13a-f61680ac8ddf/캐시.png)
 
 1. 사용자가 단축URL을 클릭한다.
 2. 로드밸런서가 해당 클릭으로 발생한 요청을 웹 서버에 전달한다.
